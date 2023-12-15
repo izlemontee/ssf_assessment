@@ -7,9 +7,9 @@
 </head>
 <body>
     <h1>Register Event</h1>
-    <h2>You choose the following event:</h2>
+    <h2>You chose the following event:</h2>
     <div th:text="${event.eventName}"></div>
-    <div th:text="${event.eventDate}"></div>
+    <div th:text="${#dates.format(new java.util.Date(event.eventDate),'dd-MM-yyyy')}"></div>
     <div>
     <form method="POST" data-th-action="@{/registration/register}" data-th-object="${participant}">
         

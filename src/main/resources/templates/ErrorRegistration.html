@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Error</h1>
+    <div>
+        You didn't manage to register for the following reasons:
+    </div>
+    <div th:unless="${aboveTwentyOne}">You are below 21 years old.</div>
+    <div th:unless="${eventHasSpace}">Your request for tickets exceeded the event size.</div>
+
+    <div>
+        <a th:href="@{/events/listing}">Back to Event Listing</a>
+    </div>
+</body>
+</html>

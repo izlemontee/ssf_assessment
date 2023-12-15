@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import jakarta.servlet.http.HttpSession;
 import vttp.ssf.assessment.eventmanagement.models.Event;
 import vttp.ssf.assessment.eventmanagement.repositories.RedisRepository;
 import vttp.ssf.assessment.eventmanagement.services.DatabaseService;
@@ -36,6 +38,13 @@ public class EventController {
 		model.addAttribute("events", eventList);
 
 		return "view0";
+	}
+
+	@GetMapping(path = "/register/{id}")
+	public String registerForEvent(@PathVariable("id") String id,HttpSession session){
+		session.setAttribute("id", id);
+		return "redirect:/events/register";
+
 	}
 
 

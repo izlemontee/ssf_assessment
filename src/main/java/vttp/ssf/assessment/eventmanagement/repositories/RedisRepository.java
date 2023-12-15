@@ -41,4 +41,9 @@ public class RedisRepository {
 		System.out.println("Event: "+event);
 		return event;
 	}
+
+	public void updateEvent(Integer index, Event event){
+		template.opsForList().set("events",index,event);
+		System.out.println("Update successful");
+	}
 }

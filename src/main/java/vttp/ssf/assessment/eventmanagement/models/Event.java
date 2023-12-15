@@ -4,14 +4,16 @@ import java.util.Date;
 
 public class Event {
 
-    
+
     private Integer eventId;
 
     private String eventName;
 
     private Integer eventSize;
 
-    private Date eventDate;
+    //private Date eventDate;
+    
+    private Long eventDate;
 
     //private Date eventDateConverted;
 
@@ -21,7 +23,7 @@ public class Event {
 
     }
 
-    public Event(Integer eventId, String eventName, Integer eventSize, Date eventDate, Integer participants) {
+    public Event(Integer eventId, String eventName, Integer eventSize, Long eventDate, Integer participants) {
         this.eventId = eventId;
         this.eventName = eventName;
         this.eventSize = eventSize;
@@ -53,11 +55,11 @@ public class Event {
         this.eventSize = eventSize;
     }
 
-    public Date getEventDate() {
+    public Long getEventDate() {
         return eventDate;
     }
 
-    public void setEventDate(Date eventDate) {
+    public void setEventDate(Long eventDate) {
         this.eventDate = eventDate;
     }
 

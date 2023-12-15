@@ -23,9 +23,9 @@
                 <td th:text="${event.eventId}"></td>
                 <td th:text="${event.eventName}"></td>
                 <td th:text="${event.eventSize}"></td>
-                <td th:text="${event.eventDate}"></td>
+                <td th:text="${#dates.format(new java.util.Date(event.eventDate),'dd-MM-yyyy')}"></td>
                 <td>
-                    <a th:href="@{/events/register/{id}(id=${event.eventId})}">
+                    <a th:href="@{/register/{id}(id=${event.eventId})}">
                         <span>Register</span>
                     </a>
                     <!--

@@ -27,10 +27,13 @@ public class RegistrationController {
     
 
     // TODO: Task 6
-    @GetMapping(path = "/events/register/{id}")
-	public String register(@PathVariable("id") String id, Model model, HttpSession session){
+    @GetMapping(path = "/events/register")
+	public String register( Model model, HttpSession session){
+        String idString = session.getAttribute("id").toString();
+        Integer id = Integer.parseInt(idString);
         List<Event> eventList = dataSvc.getEvents();
-        Integer idNumber = 4 - Integer.parseInt(id);
+        //Integer idNumber = 4 - Integer.parseInt(id);
+        Integer idNumber = 4 - id;
         Event event = eventList.get(idNumber);
         model.addAttribute("event", event);
         session.setAttribute("event", event);
@@ -50,6 +53,18 @@ public class RegistrationController {
             //model.addAttribute("participant", new Participant());
             return "eventregister";
         }
-        return "ok";
+        boolean aboveTwentyOne = dataSvc.compareDates(participant);
+        Event event = (Event)session.getAttribute("event");
+        boolean eventHasSpace = dataSvc.checkTickets(event, participant);
+        if(aboveTwentyOne && eventHasSpace){
+            dataSvc.updateEvent(event, participant);
+            model.addAttribute("event",event);
+            return "SuccessRegistration";
+        }
+        else{
+            model.addAttribute("aboveTwentyOne", aboveTwentyOne);
+            model.addAttribute("eventHasSpace", eventHasSpace);
+            return "ErrorRegistration";
+        }
     }
 }
