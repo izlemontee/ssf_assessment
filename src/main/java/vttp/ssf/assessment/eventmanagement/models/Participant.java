@@ -33,8 +33,10 @@ public class Participant {
     @Pattern(regexp = "(8|9)[0-9]{7}", message = "Must start with 8 or 9 followed by 7 digits")
     private String phoneNo;
 
+    @NotEmpty(message = "Gender Required")
     private String gender;
 
+    @NotNull(message = "Number of tickets required")
     @Min(value = 1, message = "Minimum 1 ticket")
     @Max(value = 3, message = "Maximum 3 tickets")
     private Integer tickets;

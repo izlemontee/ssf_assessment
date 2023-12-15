@@ -59,11 +59,13 @@ public class RegistrationController {
         if(aboveTwentyOne && eventHasSpace){
             dataSvc.updateEvent(event, participant);
             model.addAttribute("event",event);
+            session.invalidate();
             return "SuccessRegistration";
         }
         else{
             model.addAttribute("aboveTwentyOne", aboveTwentyOne);
             model.addAttribute("eventHasSpace", eventHasSpace);
+            session.invalidate();
             return "ErrorRegistration";
         }
     }

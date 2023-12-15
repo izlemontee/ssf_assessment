@@ -8,8 +8,8 @@
 <body>
     <h1>Register Event</h1>
     <h2>You chose the following event:</h2>
-    <div th:text="${event.eventName}"></div>
-    <div th:text="${#dates.format(new java.util.Date(event.eventDate),'dd-MM-yyyy')}"></div>
+    <h3><span th:text="${event.eventName}"></span></h3>
+    <h3><span th:text="${#dates.format(new java.util.Date(event.eventDate),'dd-MM-yyyy')}"></span></h3>
     <div>
     <form method="POST" data-th-action="@{/registration/register}" data-th-object="${participant}">
         
@@ -45,6 +45,8 @@
             Gender <br>
             <input type="text" name="gender" data-th-field="*{gender}">
         </div>
+
+        <div data-th-if="${#fields.hasErrors('gender')}" data-th-errors="*{gender}"></div>
 
         <div>
             Number of Tickets <br>
