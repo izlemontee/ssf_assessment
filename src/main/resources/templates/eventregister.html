@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Register Event</h1>
+    <h2>You choose the following event:</h2>
+    <div th:text="${event.eventName}"></div>
+    <div th:text="${event.eventDate}"></div>
+    <div>
+    <form method="POST" th:action="@{/registration/register}" th:object="${participant}">
+        
+        <div>
+            Name <br>
+            <input type="text" name="fullName" th:value="*{fullName}">
+        </div>
+        <div>
+            DOB <br>
+            <input type="date" name="dob" th:value="*{dob}">
+        </div>
+        <div>
+            Email <br>
+            <input type="text" name="email" th:value="*{email}">
+        </div>
+        <div>
+            Mobile No <br>
+            <input type="text" name="phoneNo" th:value="*{phoneNo}">
+        </div>
+        <div>
+            Gender <br>
+            <input type="text" name="gender" th:value="*{gender}">
+        </div>
+        <div>
+            Number of Tickets <br>
+            <input type="number" name="tickets" th:value="*{tickets}">
+        </div>
+   
+        <div>
+        <button type="submit">Register</button>
+        </div>
+    </form>
+    </div>
+</body>
+</html>

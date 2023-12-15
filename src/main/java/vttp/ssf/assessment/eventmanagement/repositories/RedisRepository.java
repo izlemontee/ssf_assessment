@@ -24,7 +24,7 @@ public class RedisRepository {
 	// TODO: Task 2
 	public void saveRecord(Event event){
 
-		template.opsForList().rightPush("events", event);
+		template.opsForList().leftPush("events", event);
 	}
 
 
@@ -36,8 +36,9 @@ public class RedisRepository {
 
 
 	// TODO: Task 4
-	public void getEvent(Integer index){
+	public Event getEvent(Integer index){
 		Event event = (Event)template.opsForList().index("events",index);
 		System.out.println("Event: "+event);
+		return event;
 	}
 }

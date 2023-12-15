@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>List of events</h1>
+    <table>
+        <thead>
+            <th>
+                <td>Event ID</td>
+                <td>Event Name</td>
+                <td>Event Size</td>
+                <td>Event Date</td>
+                <td>Action</td>
+             
+            </th>
+        </thead>
+        <tbody>
+            <tr th:each="event:${events}">
+                <td th:text="${event.eventId}"></td>
+                <td th:text="${event.eventName}"></td>
+                <td th:text="${event.eventSize}"></td>
+                <td th:text="${event.eventDate}"></td>
+                <td>
+                    <a th:href="@{/events/register/{id}(id=${event.eventId})}">
+                        <span>Register</span>
+                    </a>
+                    <!--
+                    <form method="POST" action="@{/events/register/{id}(id=${event.eventId})}">
+                        <input type="submit">
+                    </form>
+                -->
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
