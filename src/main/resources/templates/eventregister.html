@@ -11,32 +11,47 @@
     <div th:text="${event.eventName}"></div>
     <div th:text="${event.eventDate}"></div>
     <div>
-    <form method="POST" th:action="@{/registration/register}" th:object="${participant}">
+    <form method="POST" data-th-action="@{/registration/register}" data-th-object="${participant}">
         
         <div>
             Name <br>
-            <input type="text" name="fullName" th:value="*{fullName}">
+            <input type="text" name="fullName" data-th-field="*{fullName}">
         </div>
+
+        <div data-th-if="${#fields.hasErrors('fullName')}" data-th-errors="*{fullName}"></div>
+
         <div>
             DOB <br>
-            <input type="date" name="dob" th:value="*{dob}">
+            <input type="date" name="dob" data-th-field="*{dob}">
         </div>
+
+        <div data-th-if="${#fields.hasErrors('dob')}" data-th-errors="*{dob}"></div>
+
         <div>
             Email <br>
-            <input type="text" name="email" th:value="*{email}">
+            <input type="text" name="email" data-th-field="*{email}">
         </div>
+
+        <div data-th-if="${#fields.hasErrors('email')}" data-th-errors="*{email}"></div>
+
         <div>
             Mobile No <br>
-            <input type="text" name="phoneNo" th:value="*{phoneNo}">
+            <input type="text" name="phoneNo" th:field="*{phoneNo}">
         </div>
+
+        <div data-th-if="${#fields.hasErrors('phoneNo')}" data-th-errors="*{phoneNo}"></div>
+
         <div>
             Gender <br>
-            <input type="text" name="gender" th:value="*{gender}">
+            <input type="text" name="gender" data-th-field="*{gender}">
         </div>
+
         <div>
             Number of Tickets <br>
-            <input type="number" name="tickets" th:value="*{tickets}">
+            <input type="number" name="tickets" data-th-field="*{tickets}">
         </div>
+
+        <div data-th-if="${#fields.hasErrors('tickets')}" data-th-errors="*{tickets}"></div>
    
         <div>
         <button type="submit">Register</button>
