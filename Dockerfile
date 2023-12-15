@@ -1,7 +1,7 @@
-FROM maven:3-eclipse-temurin-21
+FROM maven:3-eclipse-temurin-21 AS builder
 
 #working and target dir
-WORKDIR /app
+WORKDIR /src
 
 #copy all the required stuff
 COPY mvnw .
@@ -14,15 +14,18 @@ COPY src src
 #build app
 RUN mvn package -Dmaven.test.skip=true
 
-ENV PORT=8080 
-ARG SPRING_REDIS_HOST
-RUN echo $SPRING_REDIS_HOST
-ARG SPRING_REDIS_PORT
-RUN echo $SPRING_REDIS_PORT
-ARG SPRING_REDIS_USER
-RUN echo $SPRING_REDIS_USER
-ARG SPRING_REDIS_PASSWORD
-RUN echo $SPRING_REDIS_PASSWORD
 
-EXPOSE ${PORT} 
-ENTRYPOINT SERVER_PORT=${PORT}  java -jar target/eventmanagement-0.0.1-SNAPSHOT.jar
+FROM maven:3-eclipse-temurin-21
+WORKDIR /app
+
+# copy and rename to app.jar
+COPY --from=builder /src/target/eventmanagement-0.0.1-SNAPSHOT.jar app.jar
+
+ENV PORT=8080
+ENV SPRING_REDIS_HOST=localhost SPRING_REDIS_PORT=1234
+ENV SPRING_REDIS_DATABASE=0
+ENV SPRING_REDIS_USERNAME=default SPRING_REDIS_PASSWORD=abc123
+
+EXPOSE $PORT
+
+ENTRYPOINT SERVER_PORT=${PORT} java -jar ./app.jar
